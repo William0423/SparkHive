@@ -1,18 +1,16 @@
-package com.sh.java;
+package com.sh.java.utils;
 
 import java.sql.*;
 
-public class JavaConnection {
+public class HiveUtils {
 
-    /**
-     * 网上很多相关教程的driverName值都是： "org.apache.hadoop.hive.jdbc.HiveDriver"，是错误的。
-     */
+    // 备注，不是private static String driverName = "org.apache.hadoop.hive.jdbc.HiveDriver";
     private static String driverName = "org.apache.hive.jdbc.HiveDriver";
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Class.forName(driverName);
-        // 因为服务器启动的是HiveServer2，所以此处的连接不是"jdbc:hive://localhost:10000/default"
-        // "hadoop"参数对应部署hive所在服务器的用户名，需要在hadoop的core-site.xml文件中配置；hive是表名，需要在hive的hive-site.xml文件中配置
-        Connection con = DriverManager.getConnection("jdbc:hive2://localhost:10000/default", "hadoop", "hive");
+        // 备注：不是jdbc:hive://localhost:10000/default", "", ""
+        Connection con = DriverManager.getConnection("jdbc:hive2://localhost:10000/default", "hadoop", "hive");// 此处的hadoop是服务器对应的user的name名称；hive是表名
         Statement stmt = con.createStatement();
 
         String tableName = "hive_bdtable";
@@ -30,7 +28,10 @@ public class JavaConnection {
         while (res.next()) {
             System.out.println(String.valueOf(res.getString(1)) + " " + res.getDouble(2) + " " + res.getDouble(3));
         }
+
+
         System.out.println("Database userdb created successfully.");
+
         con.close();
     }
 }
