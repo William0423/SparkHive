@@ -17,9 +17,6 @@
 <!-- Put site-specific property overrides in this file. -->
 
 <configuration>
-	<!-- 切换到非伪分布式 -->
-
-	
 	<property>
 		<name>hadoop.tmp.dir</name>
 		<value>file:/usr/local/hadoop/tmp</value>
@@ -32,7 +29,7 @@
 	
 
 	<property>
-		<!--操作hadoop的主机名-->
+		<!-- 部署hadoop的主机名 -->
 	      <name>hadoop.proxyuser.hadoop.groups</name>
 	      <value>hadoop</value>
 	      <description>Allow the superuser oozie to impersonate any members of the group group1 and group2</description>
